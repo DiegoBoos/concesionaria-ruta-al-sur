@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "385875466849",
+    "project_id": "ruta-al-sur-v2",
+    "storage_bucket": "ruta-al-sur-v2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385875466849:android:5de26d574bf492ac262820",
+        "android_client_info": {
+          "package_name": "com.example.ruta_al_sur_v2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "385875466849-rd6bl7ekmqh7jqgo9ud4t0lglm3rf1al.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIOMXZa0lJg5YW70XBqrVqIoZPLy8DarY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385875466849-rd6bl7ekmqh7jqgo9ud4t0lglm3rf1al.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
