@@ -10,6 +10,7 @@ class Worker {
   String? eps;
   String? gender;
   String? induction;
+  String? state;
   String? initialDate;
   String isEnabled;
   String? position;
@@ -25,6 +26,7 @@ class Worker {
       this.eps,
       this.gender,
       this.induction,
+      this.state,
       this.initialDate,
       required this.isEnabled,
       this.position,
@@ -33,18 +35,20 @@ class Worker {
   static Worker fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final map = snapshot.data()!;
     return Worker(
-        afp: map['afp'],
-        arl: map['arl'],
-        caja: map['caja'],
-        company: map['company'],
-        consec: map['consec'],
-        document: map['document'],
-        eps: map['eps'],
-        gender: map['gender'],
-        induction: map['induction'],
-        initialDate: map['initialDate'],
-        isEnabled: map['isEnabled'],
-        position: map['position'],
-        workerFullName: map['workerFullName']);
+      afp: map['afp'],
+      arl: map['arl'],
+      caja: map['caja'],
+      company: map['company'],
+      consec: map['consec'],
+      document: map['document'],
+      eps: map['eps'],
+      gender: map['gender'],
+      induction: map['induction'],
+      state: map['state'],
+      initialDate: map['initialDate'],
+      isEnabled: map['isEnabled'],
+      position: map['position'],
+      workerFullName: map['workerFullName'],
+    );
   }
 }

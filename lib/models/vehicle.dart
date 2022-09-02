@@ -14,6 +14,7 @@ class Vehicle {
   String? technoReviewExpiration;
   String? technoReviewNumber;
   String technoState;
+  String? state;
 
   Vehicle(
       {this.company,
@@ -28,7 +29,8 @@ class Vehicle {
       required this.soatState,
       this.technoReviewExpiration,
       this.technoReviewNumber,
-      required this.technoState});
+      required this.technoState,
+      this.state});
 
   static Vehicle fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final map = snapshot.data()!;
@@ -46,6 +48,7 @@ class Vehicle {
       technoReviewExpiration: map['technoReviewExpiration'],
       technoReviewNumber: map['technoReviewNumber'],
       technoState: map['technoState'],
+      state: map['state'],
     );
   }
 }

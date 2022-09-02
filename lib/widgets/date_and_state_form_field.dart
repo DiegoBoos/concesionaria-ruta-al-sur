@@ -9,7 +9,7 @@ class DateAndStateFormField extends StatelessWidget {
     required this.labelText,
   }) : super(key: key);
 
-  final DateTime dateTime;
+  final String dateTime;
   final String? state;
   final String labelText;
 
@@ -22,7 +22,7 @@ class DateAndStateFormField extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Flexible(
+        /* Flexible(
           flex: 2,
           child: InputDatePickerFormField(
             fieldLabelText: labelText,
@@ -30,7 +30,14 @@ class DateAndStateFormField extends StatelessWidget {
             firstDate: DateTime.utc(1845, 01, 01),
             lastDate: DateTime.utc(3000, 01, 01),
           ),
-        ),
+        ), */
+        Flexible(
+            flex: 2,
+            child: TextFormField(
+              decoration: Utils.inputDecoration(labelText),
+              initialValue: dateTime,
+              enabled: false,
+            )),
         if (state != null)
           Flexible(
             child: Padding(

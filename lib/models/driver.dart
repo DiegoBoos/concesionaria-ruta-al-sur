@@ -13,6 +13,7 @@ class Driver {
   String? medicalTestExpiration;
   String medicalTestState;
   String? name;
+  String? state;
 
   Driver(
       {this.category,
@@ -26,7 +27,8 @@ class Driver {
       required this.licenseState,
       this.medicalTestExpiration,
       required this.medicalTestState,
-      this.name});
+      this.name,
+      this.state});
 
   static Driver fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final map = snapshot.data()!;
@@ -43,6 +45,7 @@ class Driver {
       medicalTestExpiration: map['medicalTestExpiration'],
       medicalTestState: map['medicalTestState'],
       name: map['name'],
+      state: map['state'],
     );
   }
 }

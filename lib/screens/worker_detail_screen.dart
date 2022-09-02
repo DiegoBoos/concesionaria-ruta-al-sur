@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_al_sur_v2/models/worker.dart';
 import 'package:ruta_al_sur_v2/utils/utils.dart';
-import 'package:ruta_al_sur_v2/widgets/invalid_date.dart';
 import 'package:ruta_al_sur_v2/widgets/is_enabled_banner.dart';
 
 class WorkerDetailScreen extends StatelessWidget {
@@ -88,16 +87,9 @@ class WorkerDetailScreen extends StatelessWidget {
   }
 
   Widget induction() {
-    final plainDate = Utils.validateDate(worker.initialDate);
-    if (plainDate != worker.initialDate) {
-      return InvalidDate(
-          plainDate: plainDate, text: 'Fecha de expiración SOAT');
-    }
-    final dateTime = DateTime.parse(plainDate);
-
     return Row(
       children: [
-        Flexible(
+        /* Flexible(
           flex: 2,
           child: InputDatePickerFormField(
             fieldLabelText: 'Fecha Inicial',
@@ -105,6 +97,19 @@ class WorkerDetailScreen extends StatelessWidget {
             firstDate: DateTime.utc(1845, 01, 01),
             lastDate: DateTime.utc(3000, 01, 01),
           ),
+        ), */
+        Flexible(
+          child: TextFormField(
+            decoration: Utils.inputDecoration('Fecha Inicial'),
+            initialValue: worker.initialDate,
+            enabled: false,
+          ),
+        ),
+        Flexible(
+          child: TextFormField(
+              initialValue: worker.state,
+              enabled: false,
+              decoration: Utils.inputDecoration('Estado')),
         ),
         Flexible(
           child: TextFormField(

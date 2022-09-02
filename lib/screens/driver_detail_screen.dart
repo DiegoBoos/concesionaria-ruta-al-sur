@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ruta_al_sur_v2/models/driver.dart';
 import 'package:ruta_al_sur_v2/utils/utils.dart';
 import 'package:ruta_al_sur_v2/widgets/date_and_state_form_field.dart';
-import 'package:ruta_al_sur_v2/widgets/invalid_date.dart';
 import 'package:ruta_al_sur_v2/widgets/is_enabled_banner.dart';
 
 class DriverDetailScreen extends StatelessWidget {
@@ -32,7 +31,8 @@ class DriverDetailScreen extends StatelessWidget {
                 licenseExpiration(),
                 category(),
                 medicalTestExpiration(),
-                driverTestExpiration()
+                driverTestExpiration(),
+                state(),
               ],
             ),
           ),
@@ -70,14 +70,8 @@ class DriverDetailScreen extends StatelessWidget {
   }
 
   Widget licenseExpiration() {
-    final plainDate = Utils.validateDate(driver.licenseExpiration);
-    if (plainDate != driver.licenseExpiration) {
-      return InvalidDate(plainDate: plainDate, text: 'Fecha de expiración');
-    }
-
-    final dateTime = DateTime.parse(plainDate);
     return DateAndStateFormField(
-      dateTime: dateTime,
+      dateTime: driver.licenseExpiration ?? '',
       state: driver.licenseState,
       labelText: 'Fecha de expiración licencia',
     );
@@ -91,34 +85,24 @@ class DriverDetailScreen extends StatelessWidget {
   }
 
   Widget medicalTestExpiration() {
-    final plainDate = Utils.validateDate(driver.medicalTestExpiration);
-    if (plainDate != driver.medicalTestExpiration) {
-      return InvalidDate(
-          plainDate: plainDate,
-          text: 'Fecha de expiración examen médico ocupacional');
-    }
-
-    final dateTime = DateTime.parse(driver.medicalTestExpiration!);
     return DateAndStateFormField(
-      dateTime: dateTime,
+      dateTime: driver.medicalTestExpiration ?? '',
       state: driver.medicalTestState,
       labelText: 'Fecha de expiración examen médico ocupacional',
     );
   }
 
   Widget driverTestExpiration() {
-    final plainDate = Utils.validateDate(driver.driverTestExpiration);
-    if (plainDate != driver.driverTestExpiration) {
-      return InvalidDate(
-          plainDate: plainDate,
-          text: 'Fecha de expiración examen de manejo a la defensiva');
-    }
-
-    final dateTime = DateTime.parse(plainDate);
-
     return DateAndStateFormField(
-      dateTime: dateTime,
+      dateTime: driver.driverTestExpiration ?? '',
       labelText: 'Fecha de expiración examen de manejo a la defensiva',
     );
+  }
+
+  Widget state() {
+    return TextFormField(
+        initialValue: driver.state,
+        enabled: false,
+        decoration: Utils.inputDecoration('Estado'));
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ruta_al_sur_v2/models/vehicle.dart';
 import 'package:ruta_al_sur_v2/utils/utils.dart';
 import 'package:ruta_al_sur_v2/widgets/date_and_state_form_field.dart';
-import 'package:ruta_al_sur_v2/widgets/invalid_date.dart';
 import 'package:ruta_al_sur_v2/widgets/is_enabled_banner.dart';
 
 class VehicleDetailScreen extends StatelessWidget {
@@ -34,7 +33,8 @@ class VehicleDetailScreen extends StatelessWidget {
                       technoReviewNumber(),
                       technoReviewExpiration(),
                       rcePolicy(),
-                      rceExpiration()
+                      rceExpiration(),
+                      state(),
                     ],
                   ),
                 ),
@@ -87,15 +87,8 @@ class VehicleDetailScreen extends StatelessWidget {
   }
 
   Widget soatExpiration() {
-    final plainDate = Utils.validateDate(vehicle.soatExpiration);
-    if (plainDate != vehicle.soatExpiration) {
-      return InvalidDate(
-          plainDate: plainDate, text: 'Fecha de expiración SOAT');
-    }
-    final dateTime = DateTime.parse(plainDate);
-
     return DateAndStateFormField(
-      dateTime: dateTime,
+      dateTime: vehicle.soatExpiration ?? '',
       state: vehicle.soatState,
       labelText: 'Fecha de expiración SOAT',
     );
@@ -105,24 +98,14 @@ class VehicleDetailScreen extends StatelessWidget {
     return TextFormField(
         initialValue: '${vehicle.technoReviewNumber}',
         enabled: false,
-        decoration:
-            Utils.inputDecoration('Número de revisión tecnicomecánica'));
+        decoration: Utils.inputDecoration('Número de revisión tecnomecánica'));
   }
 
   Widget technoReviewExpiration() {
-    final plainDate = Utils.validateDate(vehicle.technoReviewExpiration);
-    if (plainDate != vehicle.technoReviewExpiration) {
-      return InvalidDate(
-          plainDate: plainDate,
-          text: 'Fecha de expiración revisión técnico mecánica');
-    }
-
-    final dateTime = DateTime.parse(plainDate);
-
     return DateAndStateFormField(
-      dateTime: dateTime,
+      dateTime: vehicle.technoReviewExpiration ?? '',
       state: vehicle.technoState,
-      labelText: 'Fecha de expiración revisión técnico mecánica',
+      labelText: 'Fecha de expiración tecnomecánica',
     );
   }
 
@@ -134,18 +117,17 @@ class VehicleDetailScreen extends StatelessWidget {
   }
 
   Widget rceExpiration() {
-    final plainDate = Utils.validateDate(vehicle.rceExpiration);
-    if (plainDate != vehicle.rceExpiration) {
-      return InvalidDate(
-          plainDate: plainDate, text: 'Fecha de expiración póliza');
-    }
-
-    final dateTime = DateTime.parse(plainDate);
-
     return DateAndStateFormField(
-      dateTime: dateTime,
+      dateTime: vehicle.rceExpiration ?? '',
       state: vehicle.rceState,
-      labelText: 'Fecha de expiración',
+      labelText: 'Fecha de expiración Póliza Rce',
     );
+  }
+
+  Widget state() {
+    return TextFormField(
+        initialValue: vehicle.state,
+        enabled: false,
+        decoration: Utils.inputDecoration('Estado'));
   }
 }
