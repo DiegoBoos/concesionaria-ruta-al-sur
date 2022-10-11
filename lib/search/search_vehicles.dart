@@ -80,12 +80,15 @@ class _VehicleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var buttonColor = vehicle.isEnabled == 'SI'
+    final soatState = Vehicle.soatState(vehicle.soatExpiration);
+    final technoState = Vehicle.soatState(vehicle.technoReviewExpiration);
+
+    var buttonColor = (soatState == 'VIGENTE' && technoState == 'VIGENTE')
         ? MaterialStateProperty.all(Utils.isEnabledColor)
         : MaterialStateProperty.all(Utils.isDisabledColor);
     return ListTile(
         title: Text(vehicle.licensePlate),
-        subtitle: Text(vehicle.company ?? ''),
+        subtitle: Text(vehicle.company),
         trailing: TextButton(
             onPressed: null,
             style: ButtonStyle(
@@ -93,7 +96,9 @@ class _VehicleTile extends StatelessWidget {
                 fixedSize:
                     MaterialStateProperty.all(const Size.fromWidth(130))),
             child: Text(
-                vehicle.isEnabled == 'SI' ? 'Habilitado' : 'Deshabilitado',
+                (soatState == 'VIGENTE' && technoState == 'VIGENTE')
+                    ? 'Habilitado'
+                    : 'Deshabilitado',
                 style: const TextStyle(color: Colors.white))),
         onTap: () => Navigator.push(
             context,

@@ -4,12 +4,12 @@ import 'package:ruta_al_sur_v2/utils/utils.dart';
 class DateAndStateFormField extends StatelessWidget {
   const DateAndStateFormField({
     Key? key,
-    required this.dateTime,
+    required this.date,
     this.state,
     required this.labelText,
   }) : super(key: key);
 
-  final String dateTime;
+  final String date;
   final String? state;
   final String labelText;
 
@@ -22,20 +22,11 @@ class DateAndStateFormField extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        /* Flexible(
-          flex: 2,
-          child: InputDatePickerFormField(
-            fieldLabelText: labelText,
-            initialDate: dateTime,
-            firstDate: DateTime.utc(1845, 01, 01),
-            lastDate: DateTime.utc(3000, 01, 01),
-          ),
-        ), */
         Flexible(
             flex: 2,
             child: TextFormField(
               decoration: Utils.inputDecoration(labelText),
-              initialValue: dateTime,
+              initialValue: date,
               enabled: false,
             )),
         if (state != null)

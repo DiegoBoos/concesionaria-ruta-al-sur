@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ruta_al_sur_v2/models/driver.dart';
 import 'package:ruta_al_sur_v2/utils/utils.dart';
 import 'package:ruta_al_sur_v2/widgets/date_and_state_form_field.dart';
-import 'package:ruta_al_sur_v2/widgets/is_enabled_banner.dart';
 
 class DriverDetailScreen extends StatelessWidget {
   final Driver driver;
@@ -10,7 +9,6 @@ class DriverDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isEnabled = driver.isEnabled;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(title: const Text('Detalle Conductor')),
@@ -23,22 +21,46 @@ class DriverDetailScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 5),
-                IsEnabledBanner(isEnabled: isEnabled, width: width),
+                isEnabledBanner(width, driver),
                 fullName(),
                 identification(),
-                company(),
                 licenseNumber(),
-                licenseExpiration(),
-                category(),
+                category1(),
+                category2(),
+                category3(),
+                categoryExpiration1(),
+                categoryExpiration2(),
+                categoryExpiration3(),
                 medicalTestExpiration(),
                 driverTestExpiration(),
-                state(),
+                company(),
               ],
             ),
           ),
         )
       ]),
     );
+  }
+
+  Widget isEnabledBanner(double width, Driver driver) {
+    final categoryState1 = Driver.categoryState1(driver.categoryExpiration1);
+    final medicalTestState =
+        Driver.medicalTestState(driver.medicalTestExpiration);
+
+    var buttonColor =
+        (categoryState1 == 'VIGENTE' && medicalTestState == 'VIGENTE')
+            ? MaterialStateProperty.all(Utils.isEnabledColor)
+            : MaterialStateProperty.all(Utils.isDisabledColor);
+    return TextButton(
+        onPressed: null,
+        style: ButtonStyle(
+            backgroundColor: buttonColor,
+            fixedSize: MaterialStateProperty.all(Size.fromWidth(width))),
+        child: Text(
+            (categoryState1 == 'VIGENTE' && medicalTestState == 'VIGENTE')
+                ? 'Habilitado'
+                : 'Deshabilitado',
+            style: const TextStyle(color: Colors.white)));
   }
 
   Widget fullName() {
@@ -55,13 +77,6 @@ class DriverDetailScreen extends StatelessWidget {
         decoration: Utils.inputDecoration('Identificación'));
   }
 
-  Widget company() {
-    return TextFormField(
-        initialValue: driver.company,
-        enabled: false,
-        decoration: Utils.inputDecoration('Empresa'));
-  }
-
   Widget licenseNumber() {
     return TextFormField(
         initialValue: driver.licenseNumber,
@@ -69,40 +84,82 @@ class DriverDetailScreen extends StatelessWidget {
         decoration: Utils.inputDecoration('Número de licencia'));
   }
 
-  Widget licenseExpiration() {
+  Widget category1() {
+    return TextFormField(
+        initialValue: driver.category1,
+        enabled: false,
+        decoration: Utils.inputDecoration('Categoría 1'));
+  }
+
+  Widget category2() {
+    return driver.category2 != ''
+        ? TextFormField(
+            initialValue: driver.category2,
+            enabled: false,
+            decoration: Utils.inputDecoration('Categoría 2'))
+        : Container();
+  }
+
+  Widget category3() {
+    return driver.category3 != ''
+        ? TextFormField(
+            initialValue: driver.category3,
+            enabled: false,
+            decoration: Utils.inputDecoration('Categoría 3'))
+        : Container();
+  }
+
+  Widget categoryExpiration1() {
     return DateAndStateFormField(
-      dateTime: driver.licenseExpiration ?? '',
-      state: driver.licenseState,
-      labelText: 'Fecha de expiración licencia',
+      date: driver.categoryExpiration1,
+      state: Driver.categoryState1(driver.categoryExpiration1),
+      labelText: 'Fecha de expiración categoría 1',
     );
   }
 
-  Widget category() {
-    return TextFormField(
-        initialValue: driver.category,
-        enabled: false,
-        decoration: Utils.inputDecoration('Categoría'));
+  Widget categoryExpiration2() {
+    return driver.categoryExpiration2 != ''
+        ? DateAndStateFormField(
+            date: driver.categoryExpiration2,
+            state: Driver.categoryState2(driver.categoryExpiration2),
+            labelText: 'Fecha de expiración categoría 2',
+          )
+        : Container();
+  }
+
+  Widget categoryExpiration3() {
+    return driver.categoryExpiration3 != ''
+        ? DateAndStateFormField(
+            date: driver.categoryExpiration3,
+            state: Driver.categoryState3(driver.categoryExpiration3),
+            labelText: 'Fecha de expiración categoría 3',
+          )
+        : Container();
   }
 
   Widget medicalTestExpiration() {
-    return DateAndStateFormField(
-      dateTime: driver.medicalTestExpiration ?? '',
-      state: driver.medicalTestState,
-      labelText: 'Fecha de expiración examen médico ocupacional',
-    );
+    return driver.medicalTestExpiration != ''
+        ? DateAndStateFormField(
+            date: driver.medicalTestExpiration,
+            state: Driver.medicalTestState(driver.medicalTestExpiration),
+            labelText: 'Fecha de expiración examen médico ocupacional',
+          )
+        : Container();
   }
 
   Widget driverTestExpiration() {
     return DateAndStateFormField(
-      dateTime: driver.driverTestExpiration ?? '',
+      date: driver.driverTestExpiration != ''
+          ? driver.driverTestExpiration
+          : 'N/A',
       labelText: 'Fecha de expiración examen de manejo a la defensiva',
     );
   }
 
-  Widget state() {
+  Widget company() {
     return TextFormField(
-        initialValue: driver.state,
+        initialValue: driver.company,
         enabled: false,
-        decoration: Utils.inputDecoration('Estado'));
+        decoration: Utils.inputDecoration('Empresa'));
   }
 }

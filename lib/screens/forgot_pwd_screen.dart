@@ -26,7 +26,6 @@ class _ForgotPwdScreenState extends State<ForgotPwdScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
           elevation: 0,
           title: const Text('Restaurar Contraseña'),
         ),
@@ -42,18 +41,22 @@ class _ForgotPwdScreenState extends State<ForgotPwdScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 24)),
                   const SizedBox(height: 20),
-                  TextFormField(
-                    controller: emailController,
-                    cursorColor: Colors.white,
-                    textInputAction: TextInputAction.next,
-                    decoration:
-                        const InputDecoration(labelText: 'Correo electrónico'),
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (email) =>
-                        email != null && !EmailValidator.validate(email)
-                            ? 'Correo no válido'
-                            : null,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                    child: TextFormField(
+                      controller: emailController,
+                      cursorColor: Colors.white,
+                      textInputAction: TextInputAction.next,
+                      decoration: const InputDecoration(
+                          labelText: 'Correo electrónico'),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (email) =>
+                          email != null && !EmailValidator.validate(email)
+                              ? 'Correo no válido'
+                              : null,
+                    ),
                   ),
+                  const SizedBox(height: 20),
                   ElevatedButton.icon(
                     icon: const Icon(Icons.email_outlined),
                     label:

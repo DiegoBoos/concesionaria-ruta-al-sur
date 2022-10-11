@@ -240,7 +240,7 @@ class _SignInScreenState extends State<SignInScreen> {
       suffixIcon: isPassword
           ? IconButton(
               onPressed: _toggle,
-              icon: _obscureText
+              icon: !_obscureText
                   ? const Icon(
                       Icons.remove_red_eye,
                       color: Colors.white,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_al_sur_v2/models/worker.dart';
 import 'package:ruta_al_sur_v2/utils/utils.dart';
-import 'package:ruta_al_sur_v2/widgets/is_enabled_banner.dart';
 
 class WorkerDetailScreen extends StatelessWidget {
   final Worker worker;
@@ -9,7 +8,6 @@ class WorkerDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isEnabled = worker.isEnabled;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(title: const Text('Detalle Trabajador')),
@@ -23,18 +21,18 @@ class WorkerDetailScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       const SizedBox(height: 5),
-                      IsEnabledBanner(isEnabled: isEnabled, width: width),
+                      isEnabled(width),
                       consec(),
                       document(),
                       workerFullName(),
                       gender(),
+                      position(),
                       induction(),
-                      afp(),
                       arl(),
+                      eps(),
+                      afp(),
                       caja(),
                       company(),
-                      eps(),
-                      position()
                     ],
                   ),
                 ),
@@ -44,23 +42,9 @@ class WorkerDetailScreen extends StatelessWidget {
         ]));
   }
 
-  Widget isEnabled(BuildContext context) {
-    var buttonColor = worker.isEnabled == 'SI'
-        ? MaterialStateProperty.all(Utils.isEnabledColor)
-        : MaterialStateProperty.all(Utils.isDisabledColor);
-    final width = MediaQuery.of(context).size.width;
-    return TextButton(
-        onPressed: null,
-        style: ButtonStyle(
-            backgroundColor: buttonColor,
-            fixedSize: MaterialStateProperty.all(Size.fromWidth(width))),
-        child: Text(worker.isEnabled == 'SI' ? 'Habilitado' : 'Deshabilitado',
-            style: const TextStyle(color: Colors.white)));
-  }
-
   Widget consec() {
     return TextFormField(
-        initialValue: '${worker.consec}',
+        initialValue: worker.consec,
         enabled: false,
         decoration: Utils.inputDecoration('No.'));
   }
@@ -86,30 +70,22 @@ class WorkerDetailScreen extends StatelessWidget {
         decoration: Utils.inputDecoration('Género'));
   }
 
+  Widget position() {
+    return TextFormField(
+        initialValue: worker.position,
+        enabled: false,
+        decoration: Utils.inputDecoration('Descripción del cargo'));
+  }
+
   Widget induction() {
     return Row(
       children: [
-        /* Flexible(
-          flex: 2,
-          child: InputDatePickerFormField(
-            fieldLabelText: 'Fecha Inicial',
-            initialDate: dateTime,
-            firstDate: DateTime.utc(1845, 01, 01),
-            lastDate: DateTime.utc(3000, 01, 01),
-          ),
-        ), */
         Flexible(
           child: TextFormField(
             decoration: Utils.inputDecoration('Fecha Inicial'),
             initialValue: worker.initialDate,
             enabled: false,
           ),
-        ),
-        Flexible(
-          child: TextFormField(
-              initialValue: worker.state,
-              enabled: false,
-              decoration: Utils.inputDecoration('Estado')),
         ),
         Flexible(
           child: TextFormField(
@@ -121,18 +97,25 @@ class WorkerDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget afp() {
-    return TextFormField(
-        initialValue: worker.afp,
-        enabled: false,
-        decoration: Utils.inputDecoration('AFP'));
-  }
-
   Widget arl() {
     return TextFormField(
         initialValue: worker.arl,
         enabled: false,
         decoration: Utils.inputDecoration('ARL'));
+  }
+
+  Widget eps() {
+    return TextFormField(
+        initialValue: worker.eps,
+        enabled: false,
+        decoration: Utils.inputDecoration('EPS'));
+  }
+
+  Widget afp() {
+    return TextFormField(
+        initialValue: worker.afp,
+        enabled: false,
+        decoration: Utils.inputDecoration('AFP'));
   }
 
   Widget caja() {
@@ -149,17 +132,17 @@ class WorkerDetailScreen extends StatelessWidget {
         decoration: Utils.inputDecoration('Empresa'));
   }
 
-  Widget eps() {
-    return TextFormField(
-        initialValue: worker.eps,
-        enabled: false,
-        decoration: Utils.inputDecoration('EPS'));
-  }
+  Widget isEnabled(double width) {
+    var buttonColor = worker.isEnabled == 'SI'
+        ? MaterialStateProperty.all(Utils.isEnabledColor)
+        : MaterialStateProperty.all(Utils.isDisabledColor);
 
-  Widget position() {
-    return TextFormField(
-        initialValue: worker.position,
-        enabled: false,
-        decoration: Utils.inputDecoration('Descripción del cargo'));
+    return TextButton(
+        onPressed: null,
+        style: ButtonStyle(
+            backgroundColor: buttonColor,
+            fixedSize: MaterialStateProperty.all(Size.fromWidth(width))),
+        child: Text(worker.isEnabled == 'SI' ? 'Habilitado' : 'Deshabilitado',
+            style: const TextStyle(color: Colors.white)));
   }
 }

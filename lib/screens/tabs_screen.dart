@@ -12,40 +12,37 @@ class TabsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: HomeScreen(),
-        bottomNavigationBar: ClipRRect(
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-          child: BottomNavigationBar(
-              currentIndex: 0,
-              onTap: (i) {
-                if (i == 1) {
-                  showSearch(context: context, delegate: SearchDrivers());
-                }
-                if (i == 2) {
-                  showSearch(context: context, delegate: SearchVehicles());
-                }
-                if (i == 3) {
-                  showSearch(context: context, delegate: SearchWorkers());
-                }
-              },
-              items: const [
-                BottomNavigationBarItem(
-                    backgroundColor: Utils.lightGreen,
-                    icon: Icon(Icons.home),
-                    label: 'Inicio'),
-                BottomNavigationBarItem(
-                    backgroundColor: Utils.lightGreen,
-                    icon: Icon(Icons.supervised_user_circle),
-                    label: 'Conductores'),
-                BottomNavigationBarItem(
-                    backgroundColor: Utils.lightGreen,
-                    icon: Icon(Icons.drive_eta_rounded),
-                    label: 'Vehículos'),
-                BottomNavigationBarItem(
-                    backgroundColor: Utils.lightGreen,
-                    icon: Icon(Icons.work),
-                    label: 'Trabajadores'),
-              ]),
-        ));
+        bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: 0,
+            onTap: (i) {
+              if (i == 1) {
+                showSearch(context: context, delegate: SearchDrivers());
+              }
+              if (i == 2) {
+                showSearch(context: context, delegate: SearchVehicles());
+              }
+              if (i == 3) {
+                showSearch(context: context, delegate: SearchWorkers());
+              }
+            },
+            items: const [
+              BottomNavigationBarItem(
+                  backgroundColor: Utils.lightGreen,
+                  icon: Icon(Icons.home),
+                  label: 'Inicio'),
+              BottomNavigationBarItem(
+                  backgroundColor: Utils.lightGreen,
+                  icon: Icon(Icons.supervised_user_circle),
+                  label: 'Conductores'),
+              BottomNavigationBarItem(
+                  backgroundColor: Utils.lightGreen,
+                  icon: Icon(Icons.drive_eta_rounded),
+                  label: 'Vehículos'),
+              BottomNavigationBarItem(
+                  backgroundColor: Utils.lightGreen,
+                  icon: Icon(Icons.work),
+                  label: 'Trabajadores'),
+            ]));
   }
 }

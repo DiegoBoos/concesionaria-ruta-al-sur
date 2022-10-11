@@ -1,51 +1,122 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Driver {
-  String? category;
-  String? company;
-  String? driverTestExpiration;
+  String name;
+  String lastName;
   String identification;
-  String isEnabled;
-  String? lastName;
-  String? licenseExpiration;
-  String? licenseNumber;
-  String licenseState;
-  String? medicalTestExpiration;
-  String medicalTestState;
-  String? name;
-  String? state;
+  String licenseNumber;
+  String category1;
+  String category2;
+  String category3;
+  String categoryExpiration1;
+  String categoryExpiration2;
+  String categoryExpiration3;
+  String medicalTestExpiration;
+  String driverTestExpiration;
+  String company;
 
   Driver(
-      {this.category,
-      this.company,
-      this.driverTestExpiration,
+      {required this.name,
+      required this.lastName,
       required this.identification,
-      required this.isEnabled,
-      this.lastName,
-      this.licenseExpiration,
-      this.licenseNumber,
-      required this.licenseState,
-      this.medicalTestExpiration,
-      required this.medicalTestState,
-      this.name,
-      this.state});
+      required this.licenseNumber,
+      required this.category1,
+      required this.category2,
+      required this.category3,
+      required this.categoryExpiration1,
+      required this.categoryExpiration2,
+      required this.categoryExpiration3,
+      required this.medicalTestExpiration,
+      required this.driverTestExpiration,
+      required this.company});
 
   static Driver fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final map = snapshot.data()!;
     return Driver(
-      category: map['category'],
-      company: map['company'],
-      driverTestExpiration: map['driverTestExpiration'],
-      identification: map['identification'],
-      isEnabled: map['isEnabled'],
-      lastName: map['lastName'],
-      licenseExpiration: map['licenseExpiration'],
-      licenseNumber: map['licenseNumber'],
-      licenseState: map['licenseState'],
-      medicalTestExpiration: map['medicalTestExpiration'],
-      medicalTestState: map['medicalTestState'],
-      name: map['name'],
-      state: map['state'],
-    );
+        name: map['name'],
+        lastName: map['lastName'],
+        identification: map['identification'],
+        licenseNumber: map['licenseNumber'],
+        category1: map['category1'],
+        category2: map['category2'],
+        category3: map['category3'],
+        categoryExpiration1: map['categoryExpiration1'],
+        categoryExpiration2: map['categoryExpiration2'],
+        categoryExpiration3: map['categoryExpiration3'],
+        medicalTestExpiration: map['medicalTestExpiration'],
+        driverTestExpiration: map['driverTestExpiration'],
+        company: map['company']);
+  }
+
+  static final today = DateTime.now();
+
+  static String categoryState1(String categoryExpiration1) {
+    final categoryExpiration1Dt = DateTime.tryParse(categoryExpiration1);
+
+    if (categoryExpiration1Dt != null) {
+      if (categoryExpiration1Dt.isBefore(today)) {
+        return "VENCIDO";
+      } else if (categoryExpiration1Dt.isAfter(today)) {
+        return "VIGENTE";
+      }
+    } else {
+      return categoryExpiration1;
+    }
+
+    return '';
+  }
+
+  static String categoryState2(String categoryExpiration2) {
+    if (categoryExpiration2 == '') return '';
+
+    final categoryExpiration2Dt = DateTime.tryParse(categoryExpiration2);
+
+    if (categoryExpiration2Dt != null) {
+      if (categoryExpiration2Dt.isBefore(today)) {
+        return "VENCIDO";
+      } else if (categoryExpiration2Dt.isAfter(today)) {
+        return "VIGENTE";
+      }
+    } else {
+      return categoryExpiration2;
+    }
+
+    return '';
+  }
+
+  static String categoryState3(String categoryExpiration3) {
+    if (categoryExpiration3 == '') return '';
+
+    final categoryExpiration3Dt = DateTime.tryParse(categoryExpiration3);
+
+    if (categoryExpiration3Dt != null) {
+      if (categoryExpiration3Dt.isBefore(today)) {
+        return "VENCIDO";
+      } else if (categoryExpiration3Dt.isAfter(today)) {
+        return "VIGENTE";
+      }
+    } else {
+      return categoryExpiration3;
+    }
+
+    return '';
+  }
+
+  static String medicalTestState(String medicalTestExpiration) {
+    if (medicalTestExpiration == '') return '';
+
+    final medicalTestExpirationDt = DateTime.tryParse(medicalTestExpiration);
+
+    if (medicalTestExpirationDt != null) {
+      if (medicalTestExpirationDt.isBefore(today)) {
+        return "VENCIDO";
+      } else if (medicalTestExpirationDt.isAfter(today)) {
+        return "VIGENTE";
+      }
+    } else {
+      return medicalTestExpiration;
+    }
+
+    return '';
   }
 }

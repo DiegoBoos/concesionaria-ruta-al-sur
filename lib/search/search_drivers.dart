@@ -79,9 +79,15 @@ class _DriverTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var buttonColor = driver.isEnabled == 'SI'
-        ? MaterialStateProperty.all(Utils.isEnabledColor)
-        : MaterialStateProperty.all(Utils.isDisabledColor);
+    final categoryState1 = Driver.categoryState1(driver.categoryExpiration1);
+
+    final medicalTestState =
+        Driver.medicalTestState(driver.medicalTestExpiration);
+
+    var buttonColor =
+        (categoryState1 == 'VIGENTE' && medicalTestState == 'VIGENTE')
+            ? MaterialStateProperty.all(Utils.isEnabledColor)
+            : MaterialStateProperty.all(Utils.isDisabledColor);
     return ListTile(
         title: Text('${driver.name} ${driver.lastName}'),
         subtitle: Text(driver.identification),
@@ -92,7 +98,9 @@ class _DriverTile extends StatelessWidget {
                 fixedSize:
                     MaterialStateProperty.all(const Size.fromWidth(130))),
             child: Text(
-                driver.isEnabled == 'SI' ? 'Habilitado' : 'Deshabilitado',
+                (categoryState1 == 'VIGENTE' && medicalTestState == 'VIGENTE')
+                    ? 'Habilitado'
+                    : 'Deshabilitado',
                 style: const TextStyle(color: Colors.white))),
         onTap: () => Navigator.push(
             context,

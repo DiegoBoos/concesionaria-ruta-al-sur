@@ -1,54 +1,110 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Vehicle {
-  String? company;
-  String isEnabled;
   String licensePlate;
-  String? propertyCardNumber;
-  String? rceExpiration;
-  String? rcePolicy;
-  String rceState;
-  String? soat;
-  String? soatExpiration;
-  String soatState;
-  String? technoReviewExpiration;
-  String? technoReviewNumber;
-  String technoState;
-  String? state;
+  String soat;
+  String soatExpiration;
+  String rcePolicy1;
+  String rcePolicy2;
+  String rceExpiration1;
+  String rceExpiration2;
+  String propertyCardNumber;
+  String technoReviewExpiration;
+  String technoReviewNumber;
+  String company;
 
   Vehicle(
-      {this.company,
-      required this.isEnabled,
-      required this.licensePlate,
-      this.propertyCardNumber,
-      this.rceExpiration,
-      this.rcePolicy,
-      required this.rceState,
-      this.soat,
-      this.soatExpiration,
-      required this.soatState,
-      this.technoReviewExpiration,
-      this.technoReviewNumber,
-      required this.technoState,
-      this.state});
+      {required this.licensePlate,
+      required this.soat,
+      required this.soatExpiration,
+      required this.rcePolicy1,
+      required this.rcePolicy2,
+      required this.rceExpiration1,
+      required this.rceExpiration2,
+      required this.propertyCardNumber,
+      required this.technoReviewExpiration,
+      required this.technoReviewNumber,
+      required this.company});
 
   static Vehicle fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final map = snapshot.data()!;
     return Vehicle(
-      company: map['company'],
-      isEnabled: map['isEnabled'],
-      licensePlate: map['licensePlate'],
-      propertyCardNumber: map['propertyCardNumber'],
-      rceExpiration: map['rceExpiration'],
-      rcePolicy: map['rcePolicy'],
-      rceState: map['rceState'],
-      soat: map['soat'],
-      soatExpiration: map['soatExpiration'],
-      soatState: map['soatState'],
-      technoReviewExpiration: map['technoReviewExpiration'],
-      technoReviewNumber: map['technoReviewNumber'],
-      technoState: map['technoState'],
-      state: map['state'],
-    );
+        licensePlate: map['licensePlate'],
+        soat: map['soat'],
+        soatExpiration: map['soatExpiration'],
+        rcePolicy1: map['rcePolicy1'],
+        rcePolicy2: map['rcePolicy2'],
+        rceExpiration1: map['rceExpiration1'],
+        rceExpiration2: map['rceExpiration2'],
+        propertyCardNumber: map['propertyCardNumber'],
+        technoReviewExpiration: map['technoReviewExpiration'],
+        technoReviewNumber: map['technoReviewNumber'],
+        company: map['company']);
+  }
+
+  static final today = DateTime.now();
+
+  static String soatState(String soatExpiration) {
+    final soatExpirationDt = DateTime.tryParse(soatExpiration);
+
+    if (soatExpirationDt != null) {
+      if (soatExpirationDt.isBefore(today)) {
+        return "VENCIDO";
+      } else if (soatExpirationDt.isAfter(today)) {
+        return "VIGENTE";
+      }
+    } else {
+      return soatExpiration;
+    }
+
+    return '';
+  }
+
+  static String rceState1(String rceExpiration1) {
+    final rceExpiration1Dt = DateTime.tryParse(rceExpiration1);
+
+    if (rceExpiration1Dt != null) {
+      if (rceExpiration1Dt.isBefore(today)) {
+        return "VENCIDO";
+      } else if (rceExpiration1Dt.isAfter(today)) {
+        return "VIGENTE";
+      }
+    } else {
+      return rceExpiration1;
+    }
+
+    return '';
+  }
+
+  static String rceState2(String rceExpiration2) {
+    final rceExpiration2Dt = DateTime.tryParse(rceExpiration2);
+
+    if (rceExpiration2Dt != null) {
+      if (rceExpiration2Dt.isBefore(today)) {
+        return "VENCIDO";
+      } else if (rceExpiration2Dt.isAfter(today)) {
+        return "VIGENTE";
+      }
+    } else {
+      return rceExpiration2;
+    }
+
+    return '';
+  }
+
+  static String technoState(String technoReviewExpiration) {
+    final technoReviewExpirationDt = DateTime.tryParse(technoReviewExpiration);
+
+    if (technoReviewExpirationDt != null) {
+      if (technoReviewExpirationDt.isBefore(today)) {
+        return "VENCIDO";
+      } else if (technoReviewExpirationDt.isAfter(today)) {
+        return "VIGENTE";
+      }
+    } else {
+      return technoReviewExpiration;
+    }
+
+    return '';
   }
 }
