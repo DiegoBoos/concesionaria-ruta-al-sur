@@ -49,15 +49,14 @@ class Vehicle {
 
     if (soatExpirationDt != null) {
       if (soatExpirationDt.isBefore(today)) {
-        return "VENCIDO";
+        soatExpiration = "VENCIDO";
       } else if (soatExpirationDt.isAfter(today)) {
-        return "VIGENTE";
+        soatExpiration = "VIGENTE";
       }
-    } else {
-      return soatExpiration;
+    } else if (soatExpiration == '') {
+      soatExpiration = 'N/A';
     }
-
-    return '';
+    return soatExpiration;
   }
 
   static String rceState1(String rceExpiration1) {
@@ -65,15 +64,12 @@ class Vehicle {
 
     if (rceExpiration1Dt != null) {
       if (rceExpiration1Dt.isBefore(today)) {
-        return "VENCIDO";
+        rceExpiration1 = "VENCIDO";
       } else if (rceExpiration1Dt.isAfter(today)) {
-        return "VIGENTE";
+        rceExpiration1 = "VIGENTE";
       }
-    } else {
-      return rceExpiration1;
     }
-
-    return '';
+    return rceExpiration1;
   }
 
   static String rceState2(String rceExpiration2) {
@@ -81,15 +77,13 @@ class Vehicle {
 
     if (rceExpiration2Dt != null) {
       if (rceExpiration2Dt.isBefore(today)) {
-        return "VENCIDO";
+        rceExpiration2 = "VENCIDO";
       } else if (rceExpiration2Dt.isAfter(today)) {
-        return "VIGENTE";
+        rceExpiration2 = "VIGENTE";
       }
-    } else {
-      return rceExpiration2;
     }
 
-    return '';
+    return rceExpiration2;
   }
 
   static String technoState(String technoReviewExpiration) {
@@ -97,14 +91,16 @@ class Vehicle {
 
     if (technoReviewExpirationDt != null) {
       if (technoReviewExpirationDt.isBefore(today)) {
-        return "VENCIDO";
+        technoReviewExpiration = "VENCIDO";
       } else if (technoReviewExpirationDt.isAfter(today)) {
-        return "VIGENTE";
+        technoReviewExpiration = "VIGENTE";
       }
-    } else {
-      return technoReviewExpiration;
+    } else if (technoReviewExpiration == 'N/A') {
+      technoReviewExpiration = 'VIGENTE';
+    } else if (technoReviewExpiration == '') {
+      technoReviewExpiration = 'VENCIDO';
     }
 
-    return '';
+    return technoReviewExpiration;
   }
 }

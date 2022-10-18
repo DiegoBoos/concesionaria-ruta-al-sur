@@ -5,7 +5,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruta_al_sur_v2/main.dart';
-import 'package:ruta_al_sur_v2/screens/forgot_pwd_screen.dart';
 import 'package:ruta_al_sur_v2/utils/utils.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -157,13 +156,38 @@ class _SignInScreenState extends State<SignInScreen> {
     return Align(
       alignment: Alignment.topRight,
       child: GestureDetector(
-          child: const Text('Olvidó su contraseña?',
-              style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  color: Colors.white,
-                  fontSize: 15)),
-          onTap: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const ForgotPwdScreen()))),
+        onTap: (() => _dialogBuilder(context)),
+        child: const Text('Olvidó su contraseña?',
+            style: TextStyle(
+                decoration: TextDecoration.underline,
+                color: Colors.white,
+                fontSize: 15)),
+        /*  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const ForgotPwdScreen()) ) */
+      ),
+    );
+  }
+
+  Future<void> _dialogBuilder(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('¿Olvidó su contraseña?'),
+          content: const Text(
+            'Para restablecer su contraseña por favor póngase en contacto con el administrador',
+          ),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Aceptar'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
     );
   }
 

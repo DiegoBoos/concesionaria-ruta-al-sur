@@ -7,8 +7,8 @@ class WorkerBanner extends StatelessWidget {
   final String subtitle;
   final String image;
 
-  // ignore: use_key_in_widget_constructors
   const WorkerBanner({
+    super.key,
     required this.title,
     required this.subtitle,
     required this.image,
@@ -41,11 +41,11 @@ class WorkerBanner extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 SizedBox(
+                  width: 250,
                   child: FadeInLeft(
                     child: Text(
                       subtitle,
                       style: const TextStyle(color: Colors.white, fontSize: 12),
-                      textAlign: TextAlign.justify,
                     ),
                   ),
                 ),

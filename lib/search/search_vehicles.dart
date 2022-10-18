@@ -81,7 +81,7 @@ class _VehicleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final soatState = Vehicle.soatState(vehicle.soatExpiration);
-    final technoState = Vehicle.soatState(vehicle.technoReviewExpiration);
+    final technoState = Vehicle.technoState(vehicle.technoReviewExpiration);
 
     var buttonColor = (soatState == 'VIGENTE' && technoState == 'VIGENTE')
         ? MaterialStateProperty.all(Utils.isEnabledColor)

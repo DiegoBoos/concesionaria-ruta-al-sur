@@ -55,68 +55,52 @@ class Driver {
 
     if (categoryExpiration1Dt != null) {
       if (categoryExpiration1Dt.isBefore(today)) {
-        return "VENCIDO";
+        categoryExpiration1 = "VENCIDO";
       } else if (categoryExpiration1Dt.isAfter(today)) {
-        return "VIGENTE";
+        categoryExpiration1 = "VIGENTE";
       }
-    } else {
-      return categoryExpiration1;
     }
 
-    return '';
+    return categoryExpiration1;
   }
 
   static String categoryState2(String categoryExpiration2) {
-    if (categoryExpiration2 == '') return '';
-
     final categoryExpiration2Dt = DateTime.tryParse(categoryExpiration2);
 
     if (categoryExpiration2Dt != null) {
       if (categoryExpiration2Dt.isBefore(today)) {
-        return "VENCIDO";
+        categoryExpiration2 = "VENCIDO";
       } else if (categoryExpiration2Dt.isAfter(today)) {
-        return "VIGENTE";
+        categoryExpiration2 = "VIGENTE";
       }
-    } else {
-      return categoryExpiration2;
     }
 
-    return '';
+    return categoryExpiration2;
   }
 
   static String categoryState3(String categoryExpiration3) {
-    if (categoryExpiration3 == '') return '';
-
     final categoryExpiration3Dt = DateTime.tryParse(categoryExpiration3);
 
     if (categoryExpiration3Dt != null) {
       if (categoryExpiration3Dt.isBefore(today)) {
-        return "VENCIDO";
+        categoryExpiration3 = "VENCIDO";
       } else if (categoryExpiration3Dt.isAfter(today)) {
-        return "VIGENTE";
+        categoryExpiration3 = "VIGENTE";
       }
-    } else {
-      return categoryExpiration3;
     }
-
-    return '';
+    return categoryExpiration3;
   }
 
   static String medicalTestState(String medicalTestExpiration) {
-    if (medicalTestExpiration == '') return '';
-
     final medicalTestExpirationDt = DateTime.tryParse(medicalTestExpiration);
 
     if (medicalTestExpirationDt != null) {
       if (medicalTestExpirationDt.isBefore(today)) {
-        return "VENCIDO";
+        medicalTestExpiration = "VENCIDO";
       } else if (medicalTestExpirationDt.isAfter(today)) {
-        return "VIGENTE";
+        medicalTestExpiration = "VIGENTE";
       }
-    } else {
-      return medicalTestExpiration;
     }
-
-    return '';
+    return medicalTestExpiration;
   }
 }

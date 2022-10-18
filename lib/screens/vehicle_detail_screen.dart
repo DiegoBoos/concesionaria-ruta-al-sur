@@ -46,7 +46,7 @@ class VehicleDetailScreen extends StatelessWidget {
 
   Widget isEnabledBanner(double width, Vehicle vehicle) {
     final soatState = Vehicle.soatState(vehicle.soatExpiration);
-    final technoState = Vehicle.soatState(vehicle.technoReviewExpiration);
+    final technoState = Vehicle.technoState(vehicle.technoReviewExpiration);
 
     var buttonColor = (soatState == 'VIGENTE' && technoState == 'VIGENTE')
         ? MaterialStateProperty.all(Utils.isEnabledColor)
@@ -128,9 +128,9 @@ class VehicleDetailScreen extends StatelessWidget {
 
   Widget technoReviewExpiration() {
     if (vehicle.technoReviewExpiration == 'N/A') {
-      vehicle.technoReviewExpiration = 'VIGENTE';
+      vehicle.technoReviewExpiration = 'N/A';
     } else if (vehicle.technoReviewExpiration == '') {
-      vehicle.technoReviewExpiration = 'VENCIDO';
+      vehicle.technoReviewExpiration = '';
     }
     return DateAndStateFormField(
       date: vehicle.technoReviewExpiration,
