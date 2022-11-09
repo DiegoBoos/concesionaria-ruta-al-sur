@@ -1,4 +1,4 @@
-package com.example.ruta_al_sur_v2
+package com.concesionaria.ruta.al.sur
 
 import io.flutter.embedding.android.FlutterActivity
 

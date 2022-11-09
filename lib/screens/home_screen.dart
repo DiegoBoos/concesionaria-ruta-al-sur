@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                           return WorkerBanner(
                               title: userRuta!.fullName,
                               subtitle:
-                                  'Bienvenido a la app de la Concesionaria Ruta Al Sur',
+                                  'Bienvenido a la app de la |Concesionaria Ruta Al Sur'.replaceAll("|", "\n"),
                               image: 'assets/splash.png');
                         } else {
                           return const Center(

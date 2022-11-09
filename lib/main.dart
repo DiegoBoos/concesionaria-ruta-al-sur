@@ -3,10 +3,10 @@ import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:ruta_al_sur_v2/screens/sign_in_screen.dart';
 import 'package:ruta_al_sur_v2/screens/tabs_screen.dart';
 import 'package:ruta_al_sur_v2/utils/utils.dart';
 import 'firebase_options.dart';
-import 'screens/auth_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,7 +72,7 @@ class _MainPageState extends State<MainPage> {
           if (snapshot.hasData) {
             return const TabsScreen();
           } else {
-            return const AuthScreen();
+            return const SignInScreen();
           }
         },
       ));

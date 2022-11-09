@@ -16,7 +16,7 @@ class WorkerBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 10),
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -26,34 +26,32 @@ class WorkerBanner extends StatelessWidget {
             colors: [Utils.green, Utils.lightGreen]),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            margin: const EdgeInsets.all(20),
+          Padding(
+            padding: const EdgeInsets.only(left:30.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FadeInRight(
-                  child: Text(
-                    title,
-                    style: const TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  width: 250,
-                  child: FadeInLeft(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FadeInRight(
                     child: Text(
+                      title,
+                      style: const TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  FadeInLeft(
+                    child: Text(
+
                       subtitle,
                       style: const TextStyle(color: Colors.white, fontSize: 12),
                     ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
           ),
-          Container(
-            margin: const EdgeInsets.only(right: 20),
+          Expanded(child: Container()),
+          Padding(
+            padding: const EdgeInsets.only(right: 30.0, top: 10,bottom: 10),
             child: BounceInDown(
               delay: const Duration(milliseconds: 500),
               child: Image.asset(

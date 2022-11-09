@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ruta_al_sur_v2">
+    package="com.concesionaria.ruta.al.sur">
    <application
         android:label="Ruta al sur"
         android:name="${applicationName}"

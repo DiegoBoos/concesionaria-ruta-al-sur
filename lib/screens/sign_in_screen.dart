@@ -1,17 +1,13 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruta_al_sur_v2/main.dart';
 import 'package:ruta_al_sur_v2/utils/utils.dart';
 
 class SignInScreen extends StatefulWidget {
-  final VoidCallback onClickedSignIn;
-
-  const SignInScreen({Key? key, required this.onClickedSignIn})
-      : super(key: key);
+  const SignInScreen({super.key});
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -19,8 +15,8 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailController = TextEditingController(text: 'ejemplo@rutaalsur.co');
+  final passwordController = TextEditingController(text: '123456');
 
   bool _obscureText = true;
 
@@ -89,7 +85,6 @@ class _SignInScreenState extends State<SignInScreen> {
                                   const SizedBox(height: 20),
                                   _forgotPassword(context),
                                   const SizedBox(height: 30),
-                                  _register(),
                                   Expanded(child: Container()),
                                   Column(
                                     children: [
@@ -101,7 +96,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                             fontSize: 12),
                                       ),
                                       Text(
-                                        'Versión Beta de Junio 2022',
+                                        'Última versión noviembre 2022',
                                         style: TextStyle(
                                             color:
                                                 Colors.white.withOpacity(0.7),
@@ -133,25 +128,6 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
       );
 
-  RichText _register() {
-    return RichText(
-        text: TextSpan(
-            text: 'Registrarse  ',
-            style: const TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-            ),
-            children: [
-          TextSpan(
-              recognizer: TapGestureRecognizer()
-                ..onTap = widget.onClickedSignIn,
-              text: 'No tiene una cuenta?',
-              style: const TextStyle(
-                decoration: TextDecoration.underline,
-              ))
-        ]));
-  }
-
   Align _forgotPassword(BuildContext context) {
     return Align(
       alignment: Alignment.topRight,
@@ -162,8 +138,6 @@ class _SignInScreenState extends State<SignInScreen> {
                 decoration: TextDecoration.underline,
                 color: Colors.white,
                 fontSize: 15)),
-        /*  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const ForgotPwdScreen()) ) */
       ),
     );
   }
@@ -196,8 +170,8 @@ class _SignInScreenState extends State<SignInScreen> {
       controller: emailController,
       cursorColor: Colors.white,
       textInputAction: TextInputAction.next,
-      decoration:
-          inputDecoration('Correo electrónico', Icons.person_outline_outlined),
+      decoration: inputDecoration(
+          'Correo electrónico', Icons.person_outline_outlined, emailController),
       style: const TextStyle(color: Colors.white),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (email) => email != null && !EmailValidator.validate(email)
@@ -212,7 +186,8 @@ class _SignInScreenState extends State<SignInScreen> {
       cursorColor: Colors.white,
       textInputAction: TextInputAction.done,
       style: const TextStyle(color: Colors.white),
-      decoration: inputDecoration('Contraseña', Icons.lock, true),
+      decoration:
+          inputDecoration('Contraseña', Icons.lock, passwordController, true),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (password) =>
           password != null && passwordController.text.length < 6
@@ -243,6 +218,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   InputDecoration inputDecoration(String labelText, IconData icon,
+      TextEditingController textEditingController,
       [bool isPassword = false]) {
     return InputDecoration(
       focusedErrorBorder: const UnderlineInputBorder(
@@ -261,20 +237,31 @@ class _SignInScreenState extends State<SignInScreen> {
           const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       errorStyle: const TextStyle(color: Utils.yellow),
       prefixIcon: Icon(icon, color: Colors.white),
-      suffixIcon: isPassword
-          ? IconButton(
-              onPressed: _toggle,
-              icon: !_obscureText
-                  ? const Icon(
-                      Icons.remove_red_eye,
-                      color: Colors.white,
-                    )
-                  : const FaIcon(
-                      FontAwesomeIcons.eyeSlash,
-                      color: Colors.white,
-                      size: 18,
-                    ))
-          : null,
+      suffixIcon: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          if (isPassword)
+            IconButton(
+                onPressed: _toggle,
+                icon: !_obscureText
+                    ? const Icon(
+                        Icons.remove_red_eye,
+                        color: Colors.white,
+                      )
+                    : const FaIcon(
+                        FontAwesomeIcons.eyeSlash,
+                        color: Colors.white,
+                        size: 18,
+                      )),
+          IconButton(
+              onPressed: (() => textEditingController.clear()),
+              icon: const Icon(
+                Icons.clear,
+                color: Colors.white,
+              )),
+        ],
+      ),
       labelText: labelText,
     );
   }
