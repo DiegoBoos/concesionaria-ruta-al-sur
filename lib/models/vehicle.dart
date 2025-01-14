@@ -1,17 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Vehicle {
-  String licensePlate;
-  String soat;
-  String soatExpiration;
-  String rcePolicy1;
-  String rcePolicy2;
-  String rceExpiration1;
-  String rceExpiration2;
-  String propertyCardNumber;
-  String technoReviewExpiration;
-  String technoReviewNumber;
-  String company;
+  dynamic licensePlate;
+  dynamic soat;
+  dynamic soatExpiration;
+  dynamic rcePolicy1;
+  dynamic rcePolicy2;
+  dynamic rceExpiration1;
+  dynamic rceExpiration2;
+  dynamic propertyCardNumber;
+  dynamic technoReviewExpiration;
+  dynamic technoReviewNumber;
+  dynamic company;
 
   Vehicle(
       {required this.licensePlate,

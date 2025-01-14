@@ -80,15 +80,16 @@ class _VehicleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final soatState = Vehicle.soatState(vehicle.soatExpiration);
-    final technoState = Vehicle.technoState(vehicle.technoReviewExpiration);
+    final soatState = Vehicle.soatState(vehicle.soatExpiration.toString());
+    final technoState =
+        Vehicle.technoState(vehicle.technoReviewExpiration.toString());
 
     var buttonColor = (soatState == 'VIGENTE' && technoState == 'VIGENTE')
         ? MaterialStateProperty.all(Utils.isEnabledColor)
         : MaterialStateProperty.all(Utils.isDisabledColor);
     return ListTile(
-        title: Text(vehicle.licensePlate),
-        subtitle: Text(vehicle.company),
+        title: Text('${vehicle.licensePlate}'),
+        subtitle: Text('${vehicle.company}'),
         trailing: TextButton(
             onPressed: null,
             style: ButtonStyle(

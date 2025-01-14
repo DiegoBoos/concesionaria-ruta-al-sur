@@ -44,35 +44,35 @@ class WorkerDetailScreen extends StatelessWidget {
 
   Widget consec() {
     return TextFormField(
-        initialValue: worker.consec,
+        initialValue: '${worker.consec}',
         enabled: false,
         decoration: Utils.inputDecoration('No.'));
   }
 
   Widget document() {
     return TextFormField(
-        initialValue: worker.document.toString(),
+        initialValue: '${worker.document}',
         enabled: false,
         decoration: Utils.inputDecoration('Documento'));
   }
 
   Widget workerFullName() {
     return TextFormField(
-        initialValue: worker.workerFullName,
+        initialValue: '${worker.workerFullName}',
         enabled: false,
         decoration: Utils.inputDecoration('Nombre Completo'));
   }
 
   Widget gender() {
     return TextFormField(
-        initialValue: worker.gender,
+        initialValue: '${worker.gender}',
         enabled: false,
         decoration: Utils.inputDecoration('Género'));
   }
 
   Widget position() {
     return TextFormField(
-        initialValue: worker.position,
+        initialValue: '${worker.position}',
         enabled: false,
         decoration: Utils.inputDecoration('Descripción del cargo'));
   }
@@ -83,13 +83,13 @@ class WorkerDetailScreen extends StatelessWidget {
         Flexible(
           child: TextFormField(
             decoration: Utils.inputDecoration('Fecha Inicial'),
-            initialValue: worker.initialDate,
+            initialValue: '${worker.initialDate}',
             enabled: false,
           ),
         ),
         Flexible(
           child: TextFormField(
-              initialValue: worker.induction,
+              initialValue: '${worker.induction}',
               enabled: false,
               decoration: Utils.inputDecoration('Inducción')),
         ),
@@ -99,35 +99,35 @@ class WorkerDetailScreen extends StatelessWidget {
 
   Widget arl() {
     return TextFormField(
-        initialValue: worker.arl,
+        initialValue: '${worker.arl}',
         enabled: false,
         decoration: Utils.inputDecoration('ARL'));
   }
 
   Widget eps() {
     return TextFormField(
-        initialValue: worker.eps,
+        initialValue: '${worker.eps}',
         enabled: false,
         decoration: Utils.inputDecoration('EPS'));
   }
 
   Widget afp() {
     return TextFormField(
-        initialValue: worker.afp,
+        initialValue: '${worker.afp}',
         enabled: false,
         decoration: Utils.inputDecoration('AFP'));
   }
 
   Widget caja() {
     return TextFormField(
-        initialValue: worker.caja,
+        initialValue: '${worker.caja}',
         enabled: false,
         decoration: Utils.inputDecoration('Caja de compensación familiar'));
   }
 
   Widget company() {
     return TextFormField(
-        initialValue: worker.company,
+        initialValue: '${worker.company}',
         enabled: false,
         decoration: Utils.inputDecoration('Empresa'));
   }

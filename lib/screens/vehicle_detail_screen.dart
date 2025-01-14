@@ -45,57 +45,77 @@ class VehicleDetailScreen extends StatelessWidget {
   }
 
   Widget isEnabledBanner(double width, Vehicle vehicle) {
-    final soatState = Vehicle.soatState(vehicle.soatExpiration);
-    final technoState = Vehicle.technoState(vehicle.technoReviewExpiration);
+    final soatState = Vehicle.soatState(vehicle.soatExpiration.toString());
+    final rceState1 = Vehicle.rceState1(vehicle.rceExpiration1.toString());
+    final technoState =
+        Vehicle.technoState(vehicle.technoReviewExpiration.toString());
 
-    var buttonColor = (soatState == 'VIGENTE' && technoState == 'VIGENTE')
-        ? MaterialStateProperty.all(Utils.isEnabledColor)
-        : MaterialStateProperty.all(Utils.isDisabledColor);
+    var buttonColor =
+        validateIsEnabled(soatState, rceState1, technoState, vehicle)
+            ? MaterialStateProperty.all(Utils.isEnabledColor)
+            : MaterialStateProperty.all(Utils.isDisabledColor);
     return TextButton(
         onPressed: null,
         style: ButtonStyle(
             backgroundColor: buttonColor,
             fixedSize: MaterialStateProperty.all(Size.fromWidth(width))),
         child: Text(
-            (soatState == 'VIGENTE' && technoState == 'VIGENTE')
+            validateIsEnabled(soatState, rceState1, technoState, vehicle)
                 ? 'Habilitado'
                 : 'Deshabilitado',
             style: const TextStyle(color: Colors.white)));
   }
 
+  bool validateIsEnabled(
+      String soatState, String rceState1, String technoState, Vehicle vehicle) {
+    if (vehicle.technoReviewExpiration == 'N/A' ||
+        vehicle.technoReviewExpiration == '') {
+      if (soatState == 'VIGENTE' && rceState1 == 'VIGENTE') {
+        return true;
+      }
+    } else {
+      if (soatState == 'VIGENTE' &&
+          rceState1 == 'VIGENTE' &&
+          technoState == 'VIGENTE') {
+        return true;
+      }
+    }
+    return false;
+  }
+
   Widget licensePlate() {
     return TextFormField(
-        initialValue: vehicle.licensePlate,
+        initialValue: '${vehicle.licensePlate}',
         enabled: false,
         decoration: Utils.inputDecoration('Placa'));
   }
 
   Widget soat() {
     return TextFormField(
-        initialValue: vehicle.soat != '' ? vehicle.soat : 'N/A',
+        initialValue: '${vehicle.soat ?? 'N/A'}',
         enabled: false,
         decoration: Utils.inputDecoration('SOAT'));
   }
 
   Widget soatExpiration() {
     return DateAndStateFormField(
-      date: vehicle.soatExpiration,
-      state: Vehicle.soatState(vehicle.soatExpiration),
+      date: vehicle.soatExpiration.toString(),
+      state: Vehicle.soatState(vehicle.soatExpiration.toString()),
       labelText: 'Fecha de expiración SOAT',
     );
   }
 
   Widget rcePolicy1() {
     return TextFormField(
-        initialValue: vehicle.rcePolicy1,
+        initialValue: '${vehicle.rcePolicy1}',
         enabled: false,
         decoration: Utils.inputDecoration('Póliza Rce 1'));
   }
 
   Widget rceExpiration1() {
     return DateAndStateFormField(
-      date: vehicle.rceExpiration1,
-      state: Vehicle.rceState1(vehicle.rceExpiration1),
+      date: '${vehicle.rceExpiration1}',
+      state: Vehicle.rceState1(vehicle.rceExpiration1.toString()),
       labelText: 'Fecha de expiración Póliza Rce 1',
     );
   }
@@ -103,7 +123,7 @@ class VehicleDetailScreen extends StatelessWidget {
   Widget rcePolicy2() {
     return vehicle.rcePolicy2 != ''
         ? TextFormField(
-            initialValue: vehicle.rcePolicy2,
+            initialValue: vehicle.rcePolicy2.toString(),
             enabled: false,
             decoration: Utils.inputDecoration('Póliza Rce 2'))
         : Container();
@@ -112,8 +132,8 @@ class VehicleDetailScreen extends StatelessWidget {
   Widget rceExpiration2() {
     return vehicle.rceExpiration2 != ''
         ? DateAndStateFormField(
-            date: vehicle.rceExpiration2,
-            state: Vehicle.rceState2(vehicle.rceExpiration2),
+            date: vehicle.rceExpiration2.toString(),
+            state: Vehicle.rceState2(vehicle.rceExpiration2.toString()),
             labelText: 'Fecha de expiración Póliza Rce 2',
           )
         : Container();
@@ -121,7 +141,7 @@ class VehicleDetailScreen extends StatelessWidget {
 
   Widget propertyCardNumber() {
     return TextFormField(
-        initialValue: vehicle.propertyCardNumber,
+        initialValue: '${vehicle.propertyCardNumber}',
         enabled: false,
         decoration: Utils.inputDecoration('Tarjeta de propiedad'));
   }
@@ -133,22 +153,22 @@ class VehicleDetailScreen extends StatelessWidget {
       vehicle.technoReviewExpiration = '';
     }
     return DateAndStateFormField(
-      date: vehicle.technoReviewExpiration,
-      state: Vehicle.technoState(vehicle.technoReviewExpiration),
+      date: vehicle.technoReviewExpiration.toString(),
+      state: Vehicle.technoState(vehicle.technoReviewExpiration.toString()),
       labelText: 'Fecha de expiración tecnomecánica',
     );
   }
 
   Widget technoReviewNumber() {
     return TextFormField(
-        initialValue: vehicle.technoReviewNumber,
+        initialValue: '${vehicle.technoReviewNumber}',
         enabled: false,
         decoration: Utils.inputDecoration('Número de revisión tecnomecánica'));
   }
 
   Widget company() {
     return TextFormField(
-        initialValue: vehicle.company,
+        initialValue: '${vehicle.company}',
         enabled: false,
         decoration: Utils.inputDecoration('Empresa'));
   }

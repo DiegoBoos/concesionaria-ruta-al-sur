@@ -1,19 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Worker {
-  String consec;
-  String document;
-  String workerFullName;
-  String gender;
-  String position;
-  String initialDate;
-  String induction;
-  String arl;
-  String eps;
-  String afp;
-  String caja;
-  String isEnabled;
-  String company;
+  dynamic consec;
+  dynamic document;
+  dynamic workerFullName;
+  dynamic gender;
+  dynamic position;
+  dynamic initialDate;
+  dynamic induction;
+  dynamic arl;
+  dynamic eps;
+  dynamic afp;
+  dynamic caja;
+  dynamic isEnabled;
+  dynamic company;
 
   Worker(
       {required this.consec,

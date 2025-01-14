@@ -1,19 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Driver {
-  String name;
-  String lastName;
-  String identification;
-  String licenseNumber;
-  String category1;
-  String category2;
-  String category3;
-  String categoryExpiration1;
-  String categoryExpiration2;
-  String categoryExpiration3;
-  String medicalTestExpiration;
-  String driverTestExpiration;
-  String company;
+  dynamic name;
+  dynamic lastName;
+  dynamic identification;
+  dynamic licenseNumber;
+  dynamic category1;
+  dynamic category2;
+  dynamic category3;
+  dynamic categoryExpiration1;
+  dynamic categoryExpiration2;
+  dynamic categoryExpiration3;
+  dynamic medicalTestExpiration;
+  dynamic driverTestExpiration;
+  dynamic company;
 
   Driver(
       {required this.name,
@@ -102,5 +102,18 @@ class Driver {
       }
     }
     return medicalTestExpiration;
+  }
+
+  static String driverTestState(String driverTestExpiration) {
+    final driverTestExpirationDt = DateTime.tryParse(driverTestExpiration);
+
+    if (driverTestExpirationDt != null) {
+      if (driverTestExpirationDt.isBefore(today)) {
+        driverTestExpiration = "VENCIDO";
+      } else if (driverTestExpirationDt.isAfter(today)) {
+        driverTestExpiration = "VIGENTE";
+      }
+    }
+    return driverTestExpiration;
   }
 }
