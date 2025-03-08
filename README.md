@@ -1,16 +1,33 @@
-# ruta_al_sur_v2
+Ruta al Sur - Mobile Application
 
-A new Flutter project.
+📌 Overview
 
-## Getting Started
+Ruta al Sur is a mobile application designed to facilitate access to the concesionaire information such as administrate drivers, vehicles and workers. The app facilitates the database management, using Firebase for simplifying offline querying and keeping information up-to-date.
 
-This project is a starting point for a Flutter application.
+🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+Manage driver, vehicle, worker information
+Access even without internet connection
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+📲 Download & Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[Google Play Store: Ruta al Sur on Google Play](https://play.google.com/store/apps/details?id=com.concesionaria.ruta.al.sur)
+
+Minimum Requirements:
+
+Android 5.0+
+
+🛠 Tech Stack
+
+Frontend: Flutter
+
+Backend: NodeJs
+
+Database: Firestore Database 
+
+📝 License
+
+This application is managed by Concesionaria Ruta al Sur
+
+Ruta al Sur - Concesionaire in your hands 🚗🛣📲
+
